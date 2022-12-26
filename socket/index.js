@@ -1,12 +1,29 @@
-const io = require("socket.io")(8800, {
+const http = require("http");
+
+const express = require("express");
+
+const app = express();
+
+const serverSocket = http.createServer(app);
+
+const PORT = 8800;
+
+app.get('/', (req, res) =>{
+  res.write(`<h1>SOCKET RUNNING IN ${PORT}</h1>`);
+  res.end();
+})
+
+const io = require("socket.io")(serverSocket, {
   cors: {
     origin: "http://localhost:3000",
   },
 });
 
+
+
 let activeUsers = [];
 
-io.on("connection", (socket) => {
+io.on("connection", (socket) => { 
   // add new User
   socket.on("new-user-add", (newUserId) => {
     // if user is not added previously
@@ -36,4 +53,8 @@ io.on("connection", (socket) => {
       io.to(user.socketId).emit("recieve-message", data);
     }
   });
+});
+
+serverSocket.listen(PORT, () => {
+  console.log("SERVER SOCKET IS RUNNING");
 });
