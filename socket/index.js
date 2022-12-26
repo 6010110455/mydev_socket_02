@@ -15,7 +15,7 @@ app.get('/', (req, res) =>{
 
 const io = require("socket.io")(serverSocket, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "*",
   },
 });
 
