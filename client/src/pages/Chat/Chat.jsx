@@ -39,7 +39,7 @@ const Chat = () => {
  
   // Connect to Socket.io
   useEffect(() => {
-    socket.current = io("https://socket-io-yjbg.onrender.com");
+    socket.current = io("http://localhost:8800");
     socket.current.emit("new-user-add", user._id);
     socket.current.on("get-users", (users) => {
       console.log("users online", users);
@@ -57,7 +57,7 @@ const Chat = () => {
   // Get the message from socket server
   useEffect(() => {
     socket.current.on("recieve-message", (data) => {
-      console.log(data)
+      console.log("recieve-message",data)
       setReceivedMessage(data);
     }
 
@@ -105,6 +105,13 @@ const Chat = () => {
         <div style={{ width: "20rem", alignSelf: "flex-end" }}>
           <NavIcons />
         </div>
+        <button
+              onClick={() => {
+                socket.current.emit('send-message', "hello");
+              }}
+            >
+              test socket
+            </button>
         <ChatBox
           chat={currentChat}
           currentUser={user._id}
