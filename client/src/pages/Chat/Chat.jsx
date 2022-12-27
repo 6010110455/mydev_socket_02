@@ -56,7 +56,7 @@ const Chat = () => {
 
   // Get the message from socket server
   useEffect(() => {
-    socket.current.on("recieve-message", (data) => {
+    socket.current.on("receive-message", (data) => {
       console.log(data)
       setReceivedMessage(data);
     }

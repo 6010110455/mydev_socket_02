@@ -50,7 +50,7 @@ io.on("connection", (socket) => {
     console.log("Sending from socket to :", receiverId)
     console.log("Data: ", data)
     if (user) {
-      io.to(user.socketId).emit("recieve-message", data);
+      io.to(user.socketId).emit("receive-message", data);
     }
   });
 });
