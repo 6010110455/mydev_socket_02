@@ -12,7 +12,7 @@ app.get('/', (req, res) =>{
   res.write(`<h1>SOCKET RUNNING IN ${PORT}</h1>`);
   res.end();
 })
-
+ 
 const io = require("socket.io")(serverSocket, {
   cors: {
     origin: "*",
